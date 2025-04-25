@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+
+        <record id="inherit_stock_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='317']" position="replace">
+                    <button name="action_print_custom_manifest" type="object" string="Print" groups="base.group_user" class="btn-primary"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_account_move_form" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_print_pdf']" position="replace">
+                    <button name="action_print_custom_invoice" type="object" string="Print Custom" class="btn-primary"/>
+                    <button name="teswidget" type="object" string="tes" class="btn-primary"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+
+
+</odoo>

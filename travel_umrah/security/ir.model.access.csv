@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_transaction_travel_package_user,undefined.transaction.travel.package,model_transaction_travel_package,base.group_user,1,1,1,1
+access_hpp_line_user,undefined.hpp.line,model_hpp_line,base.group_user,1,1,1,1
+access_hotel_line_user,undefined.hotel.line,model_hotel_line,base.group_user,1,1,1,1
+access_airlines_line_user,undefined.airlines.line,model_airlines_line,base.group_user,1,1,1,1
+access_schedule_line_user,undefined.schedule.line,model_schedule_line,base.group_user,1,1,1,1
+access_manifest_line_user,undefined.manifest.line,model_manifest_line,base.group_user,1,1,1,1

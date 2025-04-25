@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sale_order_view_form" model="ir.ui.view">
+            <field name="name">Sale Order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="travel_package" />
+                </field>
+
+
+
+                <xpath expr="//page[@name='customer_signature']" position="after">
+
+                    <page string="Manifest">
+                        <group>
+                            <field name="manifest_line_ids" mode="list,kanban" nolabel="1" colspan="2">
+                                <list string='Create Passport Line'>
+                                    <field name="title"/>
+                                    <field name="nama_passpor"/>
+                                    <field name="gender"/>
+                                    <field name="no"/>
+                                    <field name="no_passpor"/>
+                                    <field name="tanggal_lahir"/>
+                                    <field name="tempat_lahir"/>
+                                    <field name="tanggal_berlaku"/>
+                                    <field name="tanggal_expired"/>
+                                    <field name="imigrasi"/>
+                                    <field name="tipe_kamar"/>
+                                    <field name="umur"/>
+                                    <field name="mahrom"/>
+                                    <field name="agent"/>
+                                </list>
+                                <form string='Create Passport Line'>
+                                    <group>
+                                        <separator string="Personal"/>
+                                        <group>
+                                            <field name="title"/>
+                                            <field name="nama_jamaah" />
+                                            <field name="tipe_kamar"/>
+                                            <field name="tanggal_lahir"/>
+                                        </group>
+                                        <group>
+                                            <field name="no"/>
+                                            <field name="mahrom"/>
+                                            <field name="umur"/>
+                                            <field name="tempat_lahir"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <separator string="Passport"/>
+                                        <group>
+                                            <field name="no_passpor"/>
+                                            <field name="tanggal_berlaku"/>
+                                            <field name="imigrasi"/>
+                                        </group>
+                                        <group>
+                                            <field name="nama_passpor"/>
+                                            <field name="tanggal_expired"/>
+                                            <field name="note"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <separator string="Scan Document"/>
+                                        <group>
+                                            <field name="scan_passpor" filename="file_name_passpor" widget="image"/>
+                                            <field name="scan_ktp" filename="file_name_ktp" widget="image"/>
+                                        </group>
+                                        <group>
+                                            <field name="scan_buku_nikah" filename="file_name_buku_nikah" widget="image"/>
+                                            <field name="scan_kartu_keluarga" filename="file_name_kartu_keluarga" widget="image"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+
+
+
+
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

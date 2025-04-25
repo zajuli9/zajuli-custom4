@@ -1,0 +1,174 @@
+<odoo>
+  <data>
+
+    <record id="jamaah_view_form" model="ir.ui.view">
+      <field name="name">Jamaah</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//notebook" position="before">
+          <group>
+            <separator string="Additional Information"/>
+            <group>
+              <field name="no"/>
+              <field name="nama_ayah" />
+              <field name="pekerjaan_ayah" />
+              <field name="tempat_lahir" />
+              <field name="pendidikan" />
+              <field name="status_hubungan" />
+            </group>
+            <group>
+              <field name="gender"/>
+              <field name="nama_ibu" />
+              <field name="pekerjaan_ibu" />
+              <field name="tanggal_lahir" />
+              <field name="golongan_darah" />
+              <field name="ukuran_baju" />
+            </group>
+          </group>
+          <group>
+            <separator string="Passpor Information"/>
+            <group>
+              <field name="no_passpor"/>
+              <field name="tanggal_berlaku" />
+              <field name="imigrasi" />
+            </group>
+            <group>
+              <field name="nama_passpor"/>
+              <field name="tanggal_expired" />
+            </group>
+          </group>
+          <group>
+            <separator string="Scan Document"/>
+            <group>
+              <field name="scan_passpor" filename="file_name_passpor" widget="image"/>
+              <field name="scan_ktp" filename="file_name_ktp" widget="image"/>
+            </group>
+            <group>
+              <field name="scan_buku_nikah" filename="file_name_buku_nikah" widget="image"/>
+              <field name="scan_kartu_keluarga" filename="file_name_kartu_keluarga" widget="image"/>
+            </group>
+          </group>
+        </xpath>
+        <xpath expr="//page[@name='sales_purchases']/group/group[@name='misc']" position="after">
+          <group>
+            <separator string="Travel"/>
+            <field name="airlines"/>
+            <field name="hotel" />
+          </group>
+        </xpath>
+
+      </field>
+    </record>
+
+
+    <record id="master_view_search" model="ir.ui.view">
+      <field name="name">Master Search</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_res_partner_filter"/>
+      <field name="arch" type="xml">
+        <filter name="type_person" position="after">
+          <filter string="Hotel" name="filter_hotel" domain="[('hotel', '=', True)]"/>
+          <filter string="Airlines" name="filter_airlines" domain="[('airlines', '=', True)]"/>
+        </filter>
+      </field>
+    </record>
+
+
+
+
+    <!-- Membuat Action Master Produk-->
+    <record id="master_product_action" model="ir.actions.act_window">
+      <field name="name">Product</field>
+      <field name="res_model">product.template</field>
+      <field name="view_mode">kanban,list,form,activity</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Isi produk nya....
+        </p>
+      </field>
+    </record>
+    <!-- Membuat Action Master Paket Produk-->
+    <record id="master_paket_product_action" model="ir.actions.act_window">
+      <field name="name">Paket Product</field>
+      <field name="res_model">mrp.bom</field>
+      <field name="view_mode">kanban,list,form,activity</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Isi paket produk nya....
+        </p>
+      </field>
+    </record>
+    <!-- Membuat Action Master jamaah-->
+    <record id="master_jamaah_action" model="ir.actions.act_window">
+      <field name="name">Jama'ah</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">kanban,list,form,activity</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Isi jama'ah nya....
+        </p>
+      </field>
+    </record>
+    <!-- Membuat Action  Master airlines-->
+    <record id="master_airlines_action" model="ir.actions.act_window">
+      <field name="name">Airlines</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">kanban,list,form,activity</field>
+      <field name="context">{'default_airlines': True, 'search_default_filter_airlines': 1}</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Isi maskapai penerbangan nya....
+        </p>
+      </field>
+    </record>
+    <!-- Membuat Action Master hotel-->
+    <record id="master_hotel_action" model="ir.actions.act_window">
+      <field name="name">Hotel</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">kanban,list,form,activity</field>
+      <field name="context">{'default_hotel': True, 'search_default_filter_hotel': 1}</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Isi hotel nya....
+        </p>
+      </field>
+    </record>
+
+    <!-- Membuat Action transaction travel package-->
+    <record id="transaction_travel_package_action" model="ir.actions.act_window">
+      <field name="name">Travel Package</field>
+      <field name="res_model">transaction.travel.package</field>
+      <field name="view_mode">list,form,activity</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Isi  nya....
+        </p>
+      </field>
+    </record>
+    <!-- Membuat Action transaction sales order-->
+    <record id="transaction_sales_order_action" model="ir.actions.act_window">
+      <field name="name">Sales Order</field>
+      <field name="res_model">sale.order</field>
+      <field name="view_mode">list,form,activity</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Isi hotel nya....
+        </p>
+      </field>
+    </record>
+    <!-- Membuat Action transaction customer invoice-->
+    <record id="transaction_customer_invoice_action" model="ir.actions.act_window">
+      <field name="name">Customer Invoice</field>
+      <field name="res_model">account.move</field>
+      <field name="view_mode">list,form,activity</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Isi hotel nya....
+        </p>
+      </field>
+    </record>
+
+
+  </data>
+</odoo>

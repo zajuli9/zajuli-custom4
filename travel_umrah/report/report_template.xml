@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <!-- Template untuk Report -->
+        <template id="report_stock_picking_custom">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <main>
+                        <t t-set="docs" t-value="doc_ids and env['stock.picking'].browse(doc_ids) or []"/>
+                        <div class="page">
+                            <h2 style="text-align: center;">Delivery Order</h2>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <t t-foreach="docs" t-as="doc">
+                                        <tr>
+                                            <th style="text-align: left;">Customer</th>
+                                            <td>
+                                                <t t-esc="docs.partner_id.name"/>
+                                            </td>
+                                            <th style="text-align: left;">No</th>
+                                            <td>
+                                                <t t-esc="docs.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: left;">Address</th>
+                                            <td>
+                                                <t t-esc="docs.partner_id.city"/>
+                                            </td>
+                                            <th style="text-align: left;">Tanggal</th>
+                                            <td>
+                                                <t t-esc="docs.date_done"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: left;">Mobile</th>
+                                            <td>
+                                                <t t-esc="docs.partner_id.mobile"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </thead>
+
+                            </table>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;">Product</th>
+                                        <th style="text-align: left;">QTY</th>
+                                        <th style="text-align: left;">Unit of Measure</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="docs" t-as="doc">
+                                        <t t-set="lines" t-value="doc.move_ids_without_package"/>
+                                        <t t-foreach="lines" t-as="line">
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="line.product_id.name or 'N/A'"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="line.quantity"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="line.product_uom.name or 'N/A'"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+
+                            </table>
+                            <div style="border-bottom: 40px solid black; border: 2px solid black;  text-align: center; padding: 20px; width: 50%; margin: 70px auto;">
+                                <h2>Mengetahui</h2>
+
+                                <t t-foreach="docs" t-as="doc">
+                                    <p style="padding-top: 50px">
+                                        <t t-esc="doc.create_uid.name or 'N/A'"/>
+                                    </p>
+                                </t>
+                            </div>
+                        </div>
+                    </main>
+                </t>
+            </t>
+        </template>
+
+
+        <!-- Template untuk Report -->
+        <template id="report_stock_picking_custom_invoice">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <main>
+                        <t t-set="docs" t-value="doc_ids and env['account.move'].browse(doc_ids) or []"/>
+                        <t t-set="payments" t-value="env['account.payment'].search([('partner_id', 'in', docs.mapped('partner_id.id'))])"/>
+                        <div class="page">
+                            <h2 style="text-align: center;">Customer Invoice</h2>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <t t-foreach="docs" t-as="doc">
+                                        <tr>
+                                            <th style="text-align: left;">Customer</th>
+                                            <td>
+                                                <t t-esc="docs.partner_id.name"/>
+                                            </td>
+                                            <th style="text-align: left;">No</th>
+                                            <td>
+                                                <t t-esc="docs.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: left;">Address</th>
+                                            <td>
+                                                <t t-esc="docs.partner_id.city"/>
+                                            </td>
+                                            <th style="text-align: left;">Tanggal</th>
+                                            <td>
+                                                <t t-esc="docs.invoice_date"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: left;">Mobile</th>
+                                            <td>
+                                                <t t-esc="docs.partner_id.mobile"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </thead>
+
+                            </table>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;">Product</th>
+                                        <th style="text-align: left;">QTY</th>
+                                        <th style="text-align: left;">Price Unit</th>
+                                        <th style="text-align: left;">Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="docs" t-as="doc">
+                                        <t t-set="lines" t-value="doc.invoice_line_ids"/>
+                                        <t t-foreach="lines" t-as="line">
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="line.product_id.name or 'N/A'"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="line.quantity"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="line.price_unit"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="line.price_subtotal"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="3" style="text-align: right;">Total</th>
+                                        <td>
+                                            <t t-esc="sum(doc.invoice_line_ids.mapped('price_subtotal'))"/>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>
+                            <h2 style="text-align: center;">Payment</h2>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;">Method</th>
+                                        <th style="text-align: left;">Tanggal</th>
+                                        <th style="text-align: left;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="payments" t-as="payment">
+                                        <tr>
+                                            <td>
+                                                <t t-esc="payment.journal_id.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="payment.date"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="payment.amount"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="2" style="text-align: right;">Sisa</th>
+                                        <td>
+                                            <t t-esc="sum(doc.invoice_line_ids.mapped('amount_residual'))"/>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>
+                            <div style="border-bottom: 40px solid black; border: 2px solid black;  text-align: center; padding: 20px; width: 50%; margin: 70px auto;">
+                                <h2 style="margin-top: 0px; margin-bottom: 30px;">Finance</h2>
+
+                                <t t-foreach="docs" t-as="doc">
+                                    <p style="padding-top: 50px">
+                                        <t t-esc="doc.create_uid.name or 'N/A'"/>
+                                    </p>
+                                </t>
+                            </div>
+                        </div>
+                    </main>
+                </t>
+            </t>
+        </template>
+
+    </data>
+
+
+</odoo>

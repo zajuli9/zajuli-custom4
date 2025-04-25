@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="view_mrp_bom_form_inherit" model="ir.ui.view">
+            <field name="name">mrp.bom.form.inherit</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="BoM Products">
+                        <group>
+                            <field name="bom_line_ids" nolabel="1">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="product_qty"/>
+                                    <field name="standard_price" readonly="1"/>
+                                    <field name="subtotal" readonly="1"/>
+                                </list>
+                            </field>
+                        </group>
+
+                        <group class="oe_subtotal_footer d-flex order-0 order-lg-1 flex-column gap-0 gap-sm-3" colspan="2" name="total_cost">
+                            <label for="total_cost" string="Total Cost:"/>
+                            <field name="total_cost" readonly="1" widget="monetary" nolabel="1"/>
+                        </group>
+
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+
+        <!-- Membuat View list/List Travel Package -->
+
+        <record id="travel_package_view_list" model="ir.ui.view">
+            <field name="name">List Travel Package</field>
+            <field name="model">transaction.travel.package</field>
+            <field name="arch" type="xml">
+                <list string="Travel Package List">
+                    <field name="ref"/>
+                    <field name="sale_id"/>
+                    <field name="tanggal_berangkat"/>
+                    <field name="tanggal_kembali"/>
+                    <field name="quota" />
+                    <field name="remaining_quota"/>
+                    <field name="quota_progress"/>
+                    <field name="total_cost"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Membuat View Form Travel Package -->
+
+        <record id="travel_package_view_form" model="ir.ui.view">
+            <field name="name">transaction.travel.package.form</field>
+            <field name="model">transaction.travel.package</field>
+            <field name="arch" type="xml">
+                <form string="Travel Package Form">
+                    <header>
+                        <button name="action_confirm" type="object" string="Confirm" invisible="state != 'draft'" class="btn-primary"/>
+                        <button name="action_cancel" type="object" string="Set to Draft" invisible="state != 'confirm'"/>
+                        <button name="action_update_jamaah" type="object" string="Update Jamaah" invisible="state != 'confirm'" class="btn-primary"/>
+                        <button name="action_close" type="object" string="Done" invisible="state != 'confirm'" class="oe_highlight"/>
+                        <button name="action_print_travel_package" type="object" string="Cetak Manifest" invisible="state != 'confirm'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ref"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <separator string="Informasi Jadwal"/>
+                            <group>
+                                <field name="tanggal_berangkat"/>
+                            </group>
+                            <group>
+                                <field name="tanggal_kembali"/>
+                            </group>
+                        </group>
+                        <group>
+                            <separator string="Produk"/>
+                            <group>
+                                <field name="sale_id"/>
+                            </group>
+                            <group>
+                                <field name="product_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <separator string="Seats"/>
+                            <group>
+                                <field name="quota" />
+                                <field name="remaining_quota"/>
+                            </group>
+                            <group>
+                                <field name="quota_progress" widget="progressbar"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Hotel Lines">
+                                <group>
+                                    <field name="hotel_line_ids" nolabel="1">
+                                        <list editable="bottom">
+                                            <field name="hotel_id" domain="[('hotel', '=', True)]"/>
+                                            <field name="check_in_hotel"/>
+                                            <field name="check_out_hotel"/>
+                                            <field name="kota"/>
+                                        </list>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Airline Lines">
+                                <group>
+                                    <field name="airlines_line_ids" nolabel="1">
+                                        <list editable="bottom">
+                                            <field name="airlines_id" domain="[('airlines', '=', True)]"/>
+                                            <field name="tanggal_berangkat_line"/>
+                                            <field name="kota_asal"/>
+                                            <field name="kota_tujuan"/>
+                                        </list>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Schedule Lines">
+                                <group>
+                                    <field name="schedule_line_ids" nolabel="1">
+                                        <list editable="bottom">
+                                            <field name="kegiatan"/>
+                                            <field name="tanggal_kegiatan"/>
+                                        </list>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Manifest">
+                                <group>
+                                    <field name="manifest_line_ids" mode="list,kanban" nolabel="1" colspan="2">
+                                        <list string='Create Passport Line'>
+                                            <field name="title"/>
+                                            <field name="nama_passpor"/>
+                                            <field name="gender"/>
+                                            <field name="no"/>
+                                            <field name="no_passpor"/>
+                                            <field name="tanggal_lahir"/>
+                                            <field name="tempat_lahir"/>
+                                            <field name="tanggal_berlaku"/>
+                                            <field name="tanggal_expired"/>
+                                            <field name="imigrasi"/>
+                                            <field name="tipe_kamar"/>
+                                            <field name="umur"/>
+                                            <field name="mahrom"/>
+                                            <field name="agent"/>
+                                        </list>
+
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="HPP Lines">
+                                <group>
+                                    <field name="package_line_ids" nolabel="1">
+                                        <list editable="top">
+                                            <field name="product_id"/>
+                                            <field name="product_qty"/>
+                                            <field name="product_uom_id"/>
+                                            <field name="standard_price" />
+                                            <field name="subtotal" />
+                                        </list>
+                                    </field>
+                                </group>
+                                <group class="oe_subtotal_footer">
+                                    <field name="total_cost" readonly="1" widget="monetary" />
+                                </group>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+
+
+</odoo>

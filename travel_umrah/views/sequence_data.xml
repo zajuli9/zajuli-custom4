@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <!-- Sequences Travel Package -->
+
+        <record id="seq_travel_package" model="ir.sequence">
+            <field name="name">Travel Package</field>
+            <field name="code">seq_transaction.travel.package</field>
+            <field name="prefix">PP/%(month)s/%(day)s/</field>
+            <field name="padding">5</field>
+        </record>
+
+    </data>
+
+
+</odoo>
