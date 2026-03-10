@@ -17,7 +17,7 @@
     <menuitem id="menu_item_travel_umrah_airlines" name="Airlines" parent="menu_bar_travel_umrah_master" action="master_airlines_action"/>
     <menuitem id="menu_item_travel_umrah_hotel" name="Hotel" parent="menu_bar_travel_umrah_master" action="master_hotel_action"/>
 
-    <!-- Menu Item Transaction -->
+    <!-- Menu Item Transaction  ssssss-->
     <menuitem id="menu_item_travel_umrah_travel_package" name="Travel Package" parent="menu_bar_travel_umrah_transaction" action="transaction_travel_package_action"/>
     <menuitem id="menu_item_travel_umrah_sales_order" name="Sales Order" parent="menu_bar_travel_umrah_transaction" action="transaction_sales_order_action"/>
     <menuitem id="menu_item_travel_umrah_customer_invoice" name="Customer Invoice" parent="menu_bar_travel_umrah_transaction" action="transaction_customer_invoice_action"/>
