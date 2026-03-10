@@ -13,7 +13,7 @@
 
 
 
-                <xpath expr="//page[@name='customer_signature']" position="after">
+                <!-- <xpath expr="//page[@name='customer_signature']" position="after">
 
                     <page string="Manifest">
                         <group>
@@ -78,7 +78,7 @@
                             </field>
                         </group>
                     </page>
-                </xpath>
+                </xpath> -->
 
 
 
