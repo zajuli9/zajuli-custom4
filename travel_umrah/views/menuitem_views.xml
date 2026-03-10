@@ -10,7 +10,7 @@
     <!-- Menu Bar Transaction -->
     <menuitem id="menu_bar_travel_umrah_transaction" name="Transaction" parent="menu_dashboard_travel_umrah"/>
 
-    <!-- Menu Item Master -->
+    <!-- Menu Item Master ssssss-->
     <menuitem id="menu_item_travel_umrah_product" name="Product" parent="menu_bar_travel_umrah_master" action="master_product_action"/>
     <menuitem id="menu_item_travel_umrah_paket_product" name="Paket Product" parent="menu_bar_travel_umrah_master" action="master_paket_product_action"/>
     <menuitem id="menu_item_travel_umrah_jamaah" name="Jama'ah" parent="menu_bar_travel_umrah_master" action="master_jamaah_action"/>
