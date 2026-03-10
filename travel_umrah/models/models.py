@@ -5,7 +5,7 @@ from datetime import date
 
 
 
-#transaction
+#transactionsss
 class TransactionTravelPackage(models.Model):
     _name = 'transaction.travel.package'
     _description = 'Transaction Travel Package'
